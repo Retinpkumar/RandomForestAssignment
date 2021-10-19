@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block body %}
+        <main>
+            <!-- Container for displaying output -->
+            <div class="container">
+                <div class="row fullContent border border-dark rounded-3 text-center" style="background-color:#E2E4EA";>
+                    <h1>Boston Housing Price Prediction Model using Random Forest</h1>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <div align="center" class="col-7 container rightPage  border border-dark rounded-3" style="margin-bottom:50px;">
+                        <h1> The house with given features will cost: ${{ prediction }}</h1>
+                    </div>
+                </div>
+            </div>
+            <footer><p>Created by Retin P Kumar © 2021</p></footer>
+        </main>
+{% endblock %}

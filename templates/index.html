@@ -1,0 +1,204 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block body %}
+    <main>
+        <div class="container">
+            <div class="row fullContent border border-dark rounded-3 text-center" style="background-color:#E2E4EA";>
+                <h1>Boston Housing Price Prediction Model using Random Forest</h1>
+                <!-- Container for left side column contents -->
+                <div class="col-4 container float-left leftPage  " style="background-color:#E2E4EA;">
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <!-- Container for data description -->
+                    <div class="row container leftPageTitle">
+                        <h2>About the data</h2>
+                        <p align="justify">The model predicts the housing prices in Boston area.
+                            The dataset used contains information collected by the U.S Census Service concerning housing
+                            in the area of Boston Mass.
+                        </p>
+                        <p align="justify">
+                            Since the dataset is quite old, the housing prices predicted does
+                            not reflect the current prices by any means.
+                        </p>
+                        <p align="justify">
+                            Though the original dataset can be obtained from
+                            the  <a href="http://lib.stat.cmu.edu/datasets/boston">StatLib archive</a>, in this project, I have used the
+                            pre-loaded dataset from Scikit learn library.
+                        </p>
+                    </div>
+                    <hr>
+                    <div class="row container">
+                        <h3>Data collected from</h3>
+                        <a href="#">Click here</a>
+                        <hr>
+                    </div>
+                </div>
+                <!-- Container for right side column contents -->
+                <div class="col-7 container rightPage  border border-dark rounded-3">
+                    <br>
+                    <!-- Container for input values -->
+                    <div class="row container rightPageInputs">
+                        <div class="row text-center">
+                            <h2>Enter the input values</h2>
+                        </div>
+                        <!-- Form for collecting input from user -->
+                        <form action="/predict" method="POST">
+                            <br>
+                            <div class="col-12" align="left">
+                                <!-- Input 1 -->
+                                <div class="row">
+                                    <div class="col-8">
+                                        <label for="crim">Per capita crime rate</label>
+                                    </div>
+                                    <div class="col-4" align="right">
+                                        <input type="number" step=any placeholder="CRIM" class="form-control" id="crim" name="crim" required="required">
+                                    </div>
+                                </div>
+                                <br>
+                                <!-- Input 2 -->
+                                <div class="row">
+                                    <div class="col-8">
+                                        <label for="zn">Zoned land proportion for lots above 25,000sq.ft</label>
+                                    </div>
+                                    <div class="col-4" align="right">
+                                        <select class="form-select" placeholder="ZN" id="zn" name="zn" type="number" required="required">
+                                            <option value=0 selected hidden>Select an option</option>
+                                            <option value=0>0</option>
+                                            <option value=1>1</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <br>
+                                <!-- Input 3 -->
+                                <div class="row">
+                                    <div class="col-8">
+                                        <label for="age">Proportion of owner occupied units prior to 1940</label>
+                                    </div>
+                                    <div class="col-4" align="right">
+                                        <input type="number" step=any placeholder="AGE" class="form-control" id="age" name="age" required="required">
+                                    </div>
+                                </div>
+                                <br>
+                                <!-- Input 4 -->
+                                <div class="row">
+                                    <div class="col-8">
+                                        <label for="dis">Distance to Employment center</label>
+                                    </div>
+                                    <div class="col-4" align="right">
+                                        <input type="number" step=any placeholder="DIS" class="form-control" id="dis" name="dis" required="required">
+                                    </div>
+                                </div>
+                                <br>
+                                <!-- Input 5 -->
+                                <div class="row">
+                                    <div class="col-8">
+                                        <label for="rad">Index of accessiblity to Radial Highways</label>
+                                    </div>
+                                    <div class="col-4" align="right">
+                                        <input type="number" step=any placeholder="RAD" class="form-control" id="rad" name="rad" required="required">
+                                    </div>
+                                </div>
+                                <br>
+                                <!-- Input 6 -->
+                                <div class="row">
+                                    <div class="col-8">
+                                        <label for="tax">Full value property Tax rate</label>
+                                    </div>
+                                    <div class="col-4" align="right">
+                                        <input type="number" step=any placeholder="TAX" class="form-control" id="tax" name="tax" required="required">
+                                    </div>
+                                </div>
+                                <br>
+                                <!-- Input 7 -->
+                                <div class="row">
+                                    <div class="col-8">
+                                        <label for="b">Proportion of Afro-Americans</label>
+                                    </div>
+                                    <div class="col-4" align="right">
+                                        <input type="number" step=any placeholder="B" class="form-control" id="b" name="b" required="required">
+                                    </div>
+                                </div>
+                                <br>
+                                <!-- Input 8 -->
+                                <div class="row">
+                                    <div class="col-8">
+                                        <label for="lstat">Percentage lower status of the people</label>
+                                    </div>
+                                    <div class="col-4" align="right">
+                                        <input type="number" step=any placeholder="LSTAT" class="form-control" id="lstat" name="lstat" required="required">
+                                    </div>
+                                </div>
+                                <br>
+                                <!-- Input 9 -->
+                                <div class="row">
+                                    <div class="col-8">
+                                        <label for="indus">Proportion of non-retail business acres</label>
+                                    </div>
+                                    <div class="col-4" align="right">
+                                        <select class="form-select" placeholder="INDUS" id="indus" name="indus" type="number" required="required">
+                                            <option value=0 selected hidden>
+                                                Select an option
+                                            </option>
+                                            <option value=1>1</option>
+                                            <option value=2>2</option>
+                                            <option value=3>3</option>
+                                            <option value=4>4</option>
+                                            <option value=5>5</option>
+                                            <option value=6>6</option>
+                                            <option value=7>7</option>
+                                            <option value=8>8</option>
+                                            <option value=9>9</option>
+                                            <option value=10>10</option>
+                                            <option value=11>11</option>
+                                            <option value=12>12</option>
+                                            <option value=13>13</option>
+                                            <option value=15>15</option>
+                                            <option value=18>18</option>
+                                            <option value=19>19</option>
+                                            <option value=21>21</option>
+                                            <option value=25>25</option>
+                                            <option value=27>27</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <br>
+                                <!-- Input 10 -->
+                                 <div class="row">
+                                    <div class="col-8">
+                                        <label for="rm">Average number of rooms per house</label>
+                                    </div>
+                                    <div class="col-4" align="right">
+                                        <select class="form-select" placeholder="RM" id="rm" name="rm" type="number" required="required">
+                                            <option value=3 selected hidden >
+                                                Select an option
+                                            </option>
+                                            <option value=4>4</option>
+                                            <option value=5>5</option>
+                                            <option value=6>6</option>
+                                            <option value=7>7</option>
+                                            <option value=8>8</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <!-- Predict Button-->
+                            <div class="row" style="width:100%; height:75px;">
+                                <div class="col">
+                                    <button type="submit" style="width:40%" class="btn btn-primary right">Predict</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer><p>Created by Retin P Kumar © 2021</p></footer>
+    </main>
+{% endblock %}
